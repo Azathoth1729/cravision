@@ -14,7 +14,7 @@ from .utils import verify_str_arg
 
 
 class SVHN(VisionDataset):
-    split_list = {
+    resources = {
         'train': ["http://ufldl.stanford.edu/housenumbers/train_32x32.mat",
                   "train_32x32.mat", "e26dedcc434d2e4c54c9b2d4a06d8373"],
         'test': ["http://ufldl.stanford.edu/housenumbers/test_32x32.mat",
@@ -32,10 +32,10 @@ class SVHN(VisionDataset):
         super().__init__(root, transform=transform,
                          target_transform=target_transform)
         self.split = verify_str_arg(
-            split, "split", tuple(self.split_list.keys()))
-        self.url = self.split_list[split][0]
-        self.filename = self.split_list[split][1]
-        self.file_md5 = self.split_list[split][2]
+            split, "split", tuple(self.resources.keys()))
+        self.url = self.resources[split][0]
+        self.filename = self.resources[split][1]
+        self.file_md5 = self.resources[split][2]
 
         self.transform = transform
         self.target_transform = target_transform

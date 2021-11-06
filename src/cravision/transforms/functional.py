@@ -23,7 +23,7 @@ def _is_numpy_image(img: Any) -> bool:
 def to_tensor(pic):
     """Convert a ``PIL Image`` or ``numpy.ndarray`` to tensor."""
     if not (F_pil._is_pil_image(pic) or _is_numpy(pic)):
-        raise TypeError(f"Unexpected type{type(pic)}")
+        raise TypeError(f"input pic should be PIL image or numpy.ndarray, Got {type(pic)}")
     if _is_numpy(pic) and not _is_numpy_image(pic):
         raise ValueError(f"input pic should be 2 or 3 dimensional. Got {pic.ndim} dimensions")
 
