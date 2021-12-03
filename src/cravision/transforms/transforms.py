@@ -7,7 +7,6 @@ from typing import (
     Iterable,
 )
 
-
 TransformType = Callable[[Any], Any]
 
 
@@ -44,10 +43,10 @@ class ToTensor:
     In the other cases, tensors are returned without scaling.
     """
 
-    def __call__(self, pic):
+    def __call__(self, pic: Union[Image, np.ndarray]) -> Tensor:
         return F.to_tensor(pic)
 
-    def __repr__(self):
+    def __repr__(self) -> str:
         return self.__class__.__name__ + '()'
 
 
@@ -58,13 +57,13 @@ class Lambda:
         fc (function): Lambda/function to be used for transform.
     """
 
-    def __init__(self, fc):
+    def __init__(self, fc: TransformType) -> None:
         if not callable(fc):
             raise TypeError(f"Argument fc should be callable, got {type(fc).__name__}")
         self.fc = fc
 
-    def __call__(self, img):
+    def __call__(self, img: Any) -> Any:
         return self.fc(img)
 
-    def __repr__(self):
+    def __repr__(self) -> str:
         return self.__class__.__name__ + '()'

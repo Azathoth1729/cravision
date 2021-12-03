@@ -9,6 +9,7 @@ from . import functional_tensor as F_t
 
 from typing import (
     Any,
+    Union,
 )
 
 
@@ -20,7 +21,7 @@ def _is_numpy_image(img: Any) -> bool:
     return img.ndim in {2, 3}
 
 
-def to_tensor(pic):
+def to_tensor(pic: Union[Image, np.ndarray]) -> Tensor:
     """Convert a ``PIL Image`` or ``numpy.ndarray`` to tensor."""
     if not (F_pil._is_pil_image(pic) or _is_numpy(pic)):
         raise TypeError(f"input pic should be PIL image or numpy.ndarray, Got {type(pic)}")

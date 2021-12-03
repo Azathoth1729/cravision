@@ -37,9 +37,6 @@ class SVHN(VisionDataset):
         self.filename = self.resources[split][1]
         self.file_md5 = self.resources[split][2]
 
-        self.transform = transform
-        self.target_transform = target_transform
-
         import scipy.io as sio
         # reading mat file
         loaded_mat = sio.loadmat(root / self.filename)
@@ -60,7 +57,7 @@ class SVHN(VisionDataset):
     def __getitem__(self, index: int) -> Tuple[Any, Any]:
         img, target = self.data[index], int(self.labels[index])
 
-        # return a PIL image (it's np.ndarray shape: H x W x C)
+        # return a PIL image (it's np.ndarray shape is: H x W x C)
         img = Image.fromarray(np.transpose(img, (1, 2, 0)))
 
         if self.transform is not None:

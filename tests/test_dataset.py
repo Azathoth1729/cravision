@@ -18,7 +18,9 @@ class TestVision(unittest.TestCase):
     def test_svhn(self):
         print()
         HOME = Path.home()
-        DATA_DIR = HOME / "Downloads" / "dataset"
+        WORKSHOP = HOME / "workshop" / "python"
+        DATA_DIR = WORKSHOP / "dl" / "dataset" / "svhn"
+
         cradataset = cravision.datasets.SVHN(root=DATA_DIR, transform=cravision.transforms.ToTensor())
         torchdataset = torchvision.datasets.SVHN(root=DATA_DIR, transform=torchvision.transforms.ToTensor())
 
